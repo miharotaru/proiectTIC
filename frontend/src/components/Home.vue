@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    <h1 id="title">Available libraries</h1>
+    <h1 id="title">Libraries with a lot of books!</h1>
     <div id="libraryContainer">
       <div v-for="(library, i) in libraries" :key="i" class="libraryCard">
         <h3>Name: {{ library.name }}</h3>
@@ -71,24 +71,31 @@ export default {
 </script>
 
 <style>
- /* #title {
+ #title {
   display: flex;
   justify-content: center;
-  height: 20px;
-} */
+  color: black;
+}
+
+body, html {
+    height: 100%;
+    padding-top: 44px;
+    padding-bottom: 25px;
+}
+
 #libraryContainer {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  height: 100vh;
+  height: 60vh;
 }
+
 .libraryCard {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items:start;
   border: 3px solid black;
   border-radius: 5px;
-  flex: 1;
   min-width: 200px; 
   margin: 3px;
   color: black;

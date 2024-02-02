@@ -1,21 +1,22 @@
 <template>
   <form @submit.prevent="editBook()">
+    <br />
     <div>
-      <label class="text"> Title </label>
+      <label class="textAddEditStyle"> Title </label>
       <div>
         <input v-model="title" type="text" required />
       </div>
     </div>
 
     <div>
-      <label class="text"> Author </label>
+      <label class="textAddEditStyle"> Author </label>
       <div>
         <input v-model="author" type="text" required />
       </div>
     </div>
 
     <div>
-      <label class="text"> Category </label>
+      <label class="textAddEditStyle"> Category </label>
       <div>
         <select v-model="category">
           <option
@@ -30,13 +31,14 @@
     </div>
 
     <div>
-      <label class="text"> Year </label>
+      <label class="textAddEditStyle"> Year </label>
       <div>
         <select v-model="year">
           <option
             v-for="(n, i) in Array.from(
               { length: 201 },
-              (v, i) => i + (new Date().getFullYear() - 200))"
+              (v, i) => i + (new Date().getFullYear() - 200)
+            )"
             :key="i"
             :value="n"
           >
@@ -45,7 +47,7 @@
         </select>
       </div>
     </div>
-
+    <br />
     <button type="submit" class="allButtons">Save Changes</button>
   </form>
 </template>
@@ -112,4 +114,22 @@ export default {
 };
 </script>
   
-  <style></style>
+<style>
+select {
+  width: 50%;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+input {
+  padding: 5px;
+  border-radius: 10px;
+  width: 50%;
+}
+
+.textAddEditStyle {
+  font-family: cursive;
+  font-size: 15px;
+  color: black;
+}
+</style>

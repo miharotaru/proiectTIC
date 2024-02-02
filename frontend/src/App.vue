@@ -3,7 +3,7 @@ import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <template>
-  <div>
+  <div  class="boxApp">
     <nav id="navbar">
       <div>
         <div id="navContainer">
@@ -13,7 +13,7 @@ import { RouterLink, RouterView } from "vue-router";
           <RouterLink v-if="!isAuthenticated" to="/register" class="navButton"
             >Register</RouterLink
           >
-          <RouterLink to="/" class="navButton">Home</RouterLink>
+          <RouterLink to="/" class="navButton">Libraries</RouterLink>
           <RouterLink to="/addLibrary" v-if="isAuthenticated" class="navButton"
             >Add Library</RouterLink
           >
@@ -46,10 +46,16 @@ export default {
 </script>
 
 <style>
+
+.boxApp{
+  height: 100vh;
+  width: 80vw;
+}
+
 #navbar {
   position: fixed;
-  top: 0;
-  width: 50%;
+  top: 5px;
+  width: 80vw;
   display: flex;
   flex-direction: row;
   justify-content: center;

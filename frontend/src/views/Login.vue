@@ -1,18 +1,19 @@
 <template>
-  <div>
+  <div  class="register">
+    <br />
     <h1  class="text">Sign in</h1>
     <br />
-    <form @submit.prevent="login()">
+    <form class="center" @submit.prevent="login()">
       <div>
-        <label class="text">Email</label>
+        <label class="textInput">Email</label>
         <div>
-          <input v-model="email" type="email" />
+          <input v-model="email" type="email" class="inputStile"  required/>
         </div>
       </div>
       <div>
-        <label class="text">Password</label>
+        <label class="textInput">Password</label>
         <div>
-          <input v-model="password" type="password" />
+          <input v-model="password" type="password" class="inputStile"  required/>
         </div>
       </div>
       <button type="submit" class="allButtons">Sign in</button>
@@ -54,7 +55,6 @@ export default {
 </script>
   
   <style>
-
   .text{
     color: black;
   }

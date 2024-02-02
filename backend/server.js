@@ -28,7 +28,7 @@ app.use((error, request, response, next) => {
   response.status(500).json(error);
 });
 
-//REGISTER USER
+//register user
 app.post("/register", async (req, res) => {
   let data = req.body;
   let isEmail = false;
@@ -49,7 +49,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-//LOGIN USER
+//login user
 app.post("/login", async (req, res) => {
   let data = req.body;
   let emailFound = false;
@@ -89,33 +89,32 @@ app.post("/login", async (req, res) => {
 
 //populate db libraries
 app.get("/populateLibraries", async (req, res) => {
-    let libraryMockList = generateLibraries();
-    console.log(libraryMockList)
-    libraryMockList.forEach(async (library) => {
-      await db.collection("libraries").add(library);
-    });
-  
-    res.send("Populate ok");
-  });
-  
-  //populate db books
-  app.get("/populateBooks", async (req, res) => {
-    let libraries = await db.collection("libraries").get();
-
-    libraries.forEach((library) => {
-      let bookList = generateBooks();
-      console.log(bookList)
-      bookList.forEach(async (book) => {
-        await db
-          .collection("libraries")
-          .doc(library.id)
-          .collection("books")
-          .add(book);
-      });
-    });
-    res.send("Populate ok");
+  let libraryMockList = generateLibraries();
+  console.log(libraryMockList)
+  libraryMockList.forEach(async (library) => {
+    await db.collection("libraries").add(library);
   });
 
+  res.send("Populate ok");
+});
+
+//populate db books
+app.get("/populateBooks", async (req, res) => {
+  let libraries = await db.collection("libraries").get();
+
+  libraries.forEach((library) => {
+    let bookList = generateBooks();
+    console.log(bookList)
+    bookList.forEach(async (book) => {
+      await db
+        .collection("libraries")
+        .doc(library.id)
+        .collection("books")
+        .add(book);
+    });
+  });
+  res.send("Populate ok");
+});
 
 
 //pornim aplicatia

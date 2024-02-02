@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 id="Name">Avaible books for {{ this.$route.query.name }}</h1>
+    <h1 id="title">Avaible books for {{ this.$route.query.name }}</h1>
     <button @click="addBook()" v-if="isAuthenticated" class="allButtons">
       Add Book
     </button>
@@ -89,9 +89,5 @@
   </script>
   
   <style>
-   #Name {
-    display: flex;
-    justify-content: center;
-    height: 100px;
-  }
+
   </style>

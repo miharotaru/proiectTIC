@@ -1,23 +1,25 @@
 <template>
-    <div>
+  
+    <div class="register">
       <br />
       <h1 class="text">Register</h1>
-      <form @submit.prevent="register()">
+      <br />
+      <form class="center"  @submit.prevent="register()">
         <div>
-          <label class="text">Email</label>
+          <label class="textInput">Email</label>
           <div>
-            <input v-model="email" type="email" />
+            <input v-model="email" type="email" class="inputStile" required/>
           </div>
         </div>
         <div>
-          <label class="text">Password</label>
+          <label class="textInput">Password</label>
           <div>
-            <input v-model="password" type="password" />
+            <input v-model="password" type="password" class="inputStile" required/>
           </div>
         </div>
         <button type="submit" class="allButtons">Register</button>
       </form>
-      <h3>{{ registerResponse }}</h3>
+      <h3  class="text" >{{ registerResponse }}</h3>
     </div>
   </template>
   
@@ -51,4 +53,35 @@
   };
   </script>
   
-  <style></style>
+  <style>
+.register{
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  text-align: center;
+}
+.center{
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+.inputStile{
+  padding:5px;
+  border-radius:10px;
+  width: 100%;
+}
+
+.inputStile:hover{
+  box-shadow:0 0 4px rgba(0,0,0,0.5);
+}
+
+.textInput{
+  text-align: right;
+  text-size-adjust: 10px ;
+  color: black;
+  margin: 10px;
+  font-family: cursive ;
+  font-size: 20px;
+}
+</style>

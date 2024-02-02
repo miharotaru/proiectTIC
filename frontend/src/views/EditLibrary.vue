@@ -1,22 +1,24 @@
 <template>
     <form @submit.prevent="editLibrary()">
+      <br/>
       <div>
-      <label class="text"> Name </label>
+      <label class="textAddEditStyle"> Name </label>
       <div>
         <input v-model="name" type="text" required />
       </div>
     </div> 
     <div>
-      <label class="text"> City </label>
+      <label class="textAddEditStyle"> City </label>
       <div>
         <input v-model="city" type="text" required />
       </div>
     </div>
     <div>
-      <label class="text"> County </label>
+      <label class="textAddEditStyle"> County </label>
       <div>
         <input v-model="county" type="text" required />
       </div>
+      <br/>
     </div>
       <button type="submit" class="allButtons" >Save Changes</button>
     </form>
@@ -62,4 +64,18 @@
   };
   </script>
   
-  <style></style>
+  <style>
+
+input{
+  padding:5px;
+  border-radius:10px;
+  width: 50%;
+}
+
+.textAddEditStyle{
+  font-family: cursive ;
+  font-size: 15px;
+  color: black;
+
+}
+</style>
