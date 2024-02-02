@@ -1,35 +1,52 @@
 <template>
   <form @submit.prevent="editBook()">
-    <label> Title </label>
-    <input v-model="title" type="text" required />
-    <label> Author </label>
-    <input v-model="author" type="text" required />
-    <label> Category </label>
-    <select v-model="category">
-      <!-- Aici aveam eroare si am folosit robotelul -->
-      <option
-        v-for="(category, i) in this.categoryList"
-        :key="i"
-        :value="category"
-      >
-        {{ category }}
-      </option>
-    </select>
-    <label> Year </label>
-    <select v-model="year">
-      <!-- Aici aveam eroare si am folosit robotelul -->
-      <option
-        v-for="(n, i) in Array.from(
-          { length: 201 },
-          (v, i) => i + (new Date().getFullYear() - 200)
-        )"
-        :key="i"
-        :value="n"
-      >
-        {{ n }}
-      </option>
-    </select>
-    <button type="submit">Save Changes</button>
+    <div>
+      <label class="text"> Title </label>
+      <div>
+        <input v-model="title" type="text" required />
+      </div>
+    </div>
+
+    <div>
+      <label class="text"> Author </label>
+      <div>
+        <input v-model="author" type="text" required />
+      </div>
+    </div>
+
+    <div>
+      <label class="text"> Category </label>
+      <div>
+        <select v-model="category">
+          <option
+            v-for="(category, i) in this.categoryList"
+            :key="i"
+            :value="category"
+          >
+            {{ category }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div>
+      <label class="text"> Year </label>
+      <div>
+        <select v-model="year">
+          <option
+            v-for="(n, i) in Array.from(
+              { length: 201 },
+              (v, i) => i + (new Date().getFullYear() - 200))"
+            :key="i"
+            :value="n"
+          >
+            {{ n }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <button type="submit" class="allButtons">Save Changes</button>
   </form>
 </template>
   

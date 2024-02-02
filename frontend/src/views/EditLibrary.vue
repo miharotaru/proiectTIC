@@ -1,13 +1,24 @@
 <template>
     <form @submit.prevent="editLibrary()">
-      <label> Name </label>
-      <input v-model="name" type="text" required />
-      <label> City </label>
-      <input v-model="city" type="text" required />
-      <label> County </label>
-      <input v-model="county" type="text" required />
-
-      <button type="submit">Save Changes</button>
+      <div>
+      <label class="text"> Name </label>
+      <div>
+        <input v-model="name" type="text" required />
+      </div>
+    </div> 
+    <div>
+      <label class="text"> City </label>
+      <div>
+        <input v-model="city" type="text" required />
+      </div>
+    </div>
+    <div>
+      <label class="text"> County </label>
+      <div>
+        <input v-model="county" type="text" required />
+      </div>
+    </div>
+      <button type="submit" class="allButtons" >Save Changes</button>
     </form>
   </template>
   

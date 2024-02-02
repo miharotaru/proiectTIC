@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 id="Name">Avaible books for {{ this.$route.query.name }}</h1>
-    <button @click="addBook()" v-if="isAuthenticated" class="activeButtons">
+    <button @click="addBook()" v-if="isAuthenticated" class="allButtons">
       Add Book
     </button>
     <div id="libraryContainer">
@@ -14,14 +14,14 @@
           <button
             v-if="isAuthenticated"
             @click="editBook(book)"
-            class="activeButtons"
+            class="allButtons"
           >
             Edit
           </button>
           <button
             v-if="isAuthenticated"
             @click="deleteBook(book)"
-            class="activeButtons"
+            class="allButtons"
           >
             Delete
           </button>
@@ -33,7 +33,6 @@
   
   <script>
   import { requestOptions, base_url } from "../../requestOptions";
-  //import { NavigationFailureType } from "vue-router";
   export default {
     name: "Books",
     components: {},
@@ -90,36 +89,9 @@
   </script>
   
   <style>
-  #Name {
+   #Name {
     display: flex;
     justify-content: center;
-    height: 20px;
-  }
-  #librariesContainer {
-    /* border: 1px solid red; */
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    height: 100vh;
-  }
-  .libraryCard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 3px solid rgb(82, 16, 9);
-    width: fit-content;
-    margin: 3px;
-    height: max-content;
-    padding: 3px;
-  }
-  
-  .activeButtons {
-    background-color: rgb(172, 75, 65);
-    color: whitesmoke;
-    border-radius: 5px;
-    border-color: rgb(82, 16, 9);
-    height: 30px;
-    margin: 3px;
-    margin-top: 10px;
+    height: 100px;
   }
   </style>

@@ -1,21 +1,21 @@
 <template>
     <div>
       <br />
-      <h1>Register</h1>
+      <h1 class="text">Register</h1>
       <form @submit.prevent="register()">
         <div>
-          <label>Email</label>
+          <label class="text">Email</label>
           <div>
             <input v-model="email" type="email" />
           </div>
         </div>
         <div>
-          <label>Password</label>
+          <label class="text">Password</label>
           <div>
             <input v-model="password" type="password" />
           </div>
         </div>
-        <button type="submit" class="activeButtons">Register</button>
+        <button type="submit" class="allButtons">Register</button>
       </form>
       <h3>{{ registerResponse }}</h3>
     </div>

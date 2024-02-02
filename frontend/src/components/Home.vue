@@ -9,20 +9,20 @@
         <h3>City: {{ library.city }}</h3>
         <h3>County: {{ library.county }}</h3>
         <div>
-          <button @click="showLibrary(library)" class="activeButtons">
+          <button @click="showLibrary(library)" class="allButtons">
             Show Books
           </button>
           <button
             v-if="isAuthenticated"
             @click="editLibrary(library)"
-            class="activeButtons"
+            class="allButtons"
           >
             Edit
           </button>
           <button
             v-if="isAuthenticated"
             @click="deleteLibrary(library)"
-            class="activeButtons"
+            class="allButtons"
           >
             Delete
           </button>
@@ -71,11 +71,11 @@ export default {
 </script>
 
 <style>
-#title {
+ /* #title {
   display: flex;
   justify-content: center;
   height: 20px;
-}
+} */
 #libraryContainer {
   display: flex;
   flex-direction: row;
@@ -86,25 +86,25 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 3px solid;
-  border-color: rgb(82, 16, 9) s;
+  border: 3px solid black;
   border-radius: 5px;
-  width: fit-content;
+  flex: 1;
+  min-width: 200px; 
   margin: 3px;
+  color: black;
   height: max-content;
   padding: 3px;
+  background-color: rgb(232, 200, 114);
 }
 
-.activeButtons {
-  background-color: rgb(172, 75, 65);
+.allButtons {
+  background-color: rgb(21, 156, 174);
   color: whitesmoke;
   border-radius: 5px;
-  border-color: rgb(82, 16, 9);
+  border: 2px solid rgb(115, 37, 65);
   height: 30px;
   margin: 3px;
   margin-top: 10px;
-}
-body {
-  background-color: rgb(2, 54, 15);
-}
+} 
+
 </style>

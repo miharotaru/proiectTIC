@@ -1,27 +1,30 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <template>
   <div>
-    <nav>
-      <div id="linkContainer">
-        <RouterLink v-if="!isAuthenticated" to="/login" class="link"
-          >Login</RouterLink
-        >
-        <RouterLink v-if="!isAuthenticated" to="/register" class="link"
-          >Register</RouterLink
-        >
-        <RouterLink to="/" class="link">Home</RouterLink>
-        <RouterLink to="/addLibrary" v-if="isAuthenticated" class="link"
-          >Add Library</RouterLink
-        > 
+    <nav id="navbar">
+      <div>
+        <div id="navContainer">
+          <RouterLink v-if="!isAuthenticated" to="/login" class="navButton"
+            >Login</RouterLink
+          >
+          <RouterLink v-if="!isAuthenticated" to="/register" class="navButton"
+            >Register</RouterLink
+          >
+          <RouterLink to="/" class="navButton">Home</RouterLink>
+          <RouterLink to="/addLibrary" v-if="isAuthenticated" class="navButton"
+            >Add Library</RouterLink
+          >
+          <button v-if="isAuthenticated" @click="logout()" id="logoutBtn">
+            Logout
+          </button>
+        </div>
       </div>
     </nav>
-    <button v-if="isAuthenticated" @click="logout()" id="logoutBtn">
-      Logout
-    </button>
-    <RouterView/>
+
+    <RouterView />
   </div>
 </template>
 
@@ -43,35 +46,46 @@ export default {
 </script>
 
 <style>
-nav {
+#navbar {
+  position: fixed;
+  top: 0;
+  width: 50%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   height: 40px;
-  background-color: rgb(82, 16, 9);
+  background-color: rgb(124, 147, 195);
   border-radius: 5px;
 }
 
-.link {
+body,
+html {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(201, 215, 221);
+}
+
+.navButton {
   width: max-content;
   text-decoration: none;
   color: whitesmoke;
   margin: 2px;
   padding: 5px;
-  border: 2px solid rgb(172, 75, 65);
+  border: 2px solid rgb(115, 37, 65);
   border-radius: 5px;
   text-align: center;
+  background-color: rgb(162, 87, 114);
 }
 #logoutBtn {
-  background-color: rgb(172, 75, 65);
+  background-color: rgb(21, 156, 174);
   color: whitesmoke;
   border-radius: 5px;
-  border-color: rgb(82, 16, 9);
-  height: 30px;
-  margin-top: 10px;
+  border: 2px solid rgb(115, 37, 65);
+  margin: 2px;
+  padding: 5px;
 }
 
-#linkContainer {
+#navContainer {
   display: flex;
   flex-direction: row;
   justify-items: center;
