@@ -16,7 +16,7 @@ const generateLibraries = () => {
 };
 
 const generateBooks = () => {
-  const bookCategories = ["Realitate", "Fantasy", "Istorie","IT"];
+  const bookCategories = ["Manga", "Fantasy", "History","IT"];
   bookList = [];
   for (let i = 0; i < 7; i++) {
     let initialTitle = faker.lorem.word({ length: { min: 4, max: 15 } });

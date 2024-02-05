@@ -35,7 +35,6 @@
   import { requestOptions, base_url } from "../../requestOptions";
   export default {
     name: "Books",
-    components: {},
     data() {
       return { books: [] };
     },
@@ -70,6 +69,7 @@
       },
       editBook(book) {
         let info = { ...this.$route.query };
+        console.log(info)
         info.bookId = book.id;
         info.bookTitle = book.title;
         info.bookAuthor = book.author;

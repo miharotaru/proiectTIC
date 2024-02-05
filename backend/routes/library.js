@@ -4,8 +4,11 @@ const jwt = require("jsonwebtoken");
 const db = require("../db");
 const secret = "pixelfericit";
 
+
+// MIDDLEWARE
+// checks if the request token exists and has a proper structure
 checkAuthorization = (req, res, next) => {
-  const bearerHeader = req.headers["authorization"]; //treaba cu jwt 
+  const bearerHeader = req.headers["authorization"]; 
 
   if (typeof bearerHeader !== "undefined") {
     const bearer = bearerHeader.split(" ");
@@ -14,16 +17,16 @@ checkAuthorization = (req, res, next) => {
     jwt.verify(req.token, secret, (err, decoded) => {
       if (err) {
         if (err.expiredAt) {
-          res.json("Expired token");
+          res.json("Your token has expired. Please re-authenticate");
         } else {
-          res.json("Decoding failed!");
+          res.json("You are NOT authorized to access this resource");
         }
       } else {
         next();
       }
     });
   } else {
-    res.json("No token found!");
+    res.sendStatus(401); //neautorizat
   }
 };
 
@@ -92,4 +95,5 @@ router.delete("/libraries/:id", checkAuthorization, async (req, res) => {
   let response = await db.collection("libraries").doc(req.params.id).delete();
   res.json("Library deleted");
 });
+
 module.exports = router;

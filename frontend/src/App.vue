@@ -1,21 +1,17 @@
-<script setup>
-import { RouterLink, RouterView } from "vue-router";
-</script>
-
 <template>
   <div  class="boxApp">
     <nav id="navbar">
       <div>
         <div id="navContainer">
-          <RouterLink v-if="!isAuthenticated" to="/login" class="navButton"
-            >Login</RouterLink
+          <router-link v-if="!isAuthenticated" to="/login" class="navButton"
+            >Login</router-link
           >
-          <RouterLink v-if="!isAuthenticated" to="/register" class="navButton"
-            >Register</RouterLink
+          <router-link v-if="!isAuthenticated" to="/register" class="navButton"
+            >Register</router-link
           >
-          <RouterLink to="/" class="navButton">Libraries</RouterLink>
-          <RouterLink to="/addLibrary" v-if="isAuthenticated" class="navButton"
-            >Add Library</RouterLink
+          <router-link to="/" class="navButton">Libraries</router-link>
+          <router-link to="/addLibrary" v-if="isAuthenticated" class="navButton"
+            >Add Library</router-link
           >
           <button v-if="isAuthenticated" @click="logout()" id="logoutBtn">
             Logout
@@ -24,13 +20,13 @@ import { RouterLink, RouterView } from "vue-router";
       </div>
     </nav>
 
-    <RouterView />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
-  computed: {
+  computed: { // reactiva in fct de starea userului
     isAuthenticated() {
       return this.$store.state.isAuthenticated;
     },
@@ -72,14 +68,13 @@ html {
 }
 
 .navButton {
+
   width: max-content;
-  text-decoration: none;
   color: whitesmoke;
   margin: 2px;
   padding: 5px;
   border: 2px solid rgb(115, 37, 65);
   border-radius: 5px;
-  text-align: center;
   background-color: rgb(162, 87, 114);
 }
 #logoutBtn {
@@ -93,7 +88,6 @@ html {
 
 #navContainer {
   display: flex;
-  flex-direction: row;
-  justify-items: center;
+  justify-content: space-around;
 }
 </style>

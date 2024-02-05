@@ -5,7 +5,7 @@ const cors = require("cors");
 const bcrypt = require("bcrypt");
 const saltRounds = 12;
 const jwt = require("jsonwebtoken");
-const logger = require("morgan"); //morgan un logger => mi le arata in terminalul server-ului
+const logger = require("morgan"); //importing a HTTP logger ->morgan un logger => mi le arata in terminalul server-ului
 const db = require("./db");
 const secret = "pixelfericit";
 
@@ -14,37 +14,37 @@ const bookRouter = require("../backend/routes/book");
 
 const { generateBooks, generateLibraries } = require("../backend/generator");
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+app.use(express.urlencoded({ extended: false }));  //conversia datelor din formular în JSON
+app.use(express.json());    //use middleware si transforma body-ul in json
 app.use(cors());
-app.use(logger("dev"));
+app.use(logger("dev")); //using the HTTP logger library
 
 app.use("/", libraryRouter);
 app.use("/", bookRouter);
 
 
-app.use((error, request, response, next) => {
+app.use((error, req, res, next) => { 
   console.error(`[ERROR]: ${error}`);
-  response.status(500).json(error);
+  res.status(500).json(error);
 });
 
 //register user
 app.post("/register", async (req, res) => {
   let data = req.body;
-  let isEmail = false;
+  let reqEmail = false;
   const userRef = db.collection("users");
   const snapshot = await userRef.where("email", "==", data.email).get();
   if (!snapshot.empty) {
-    isEmail = true;
+    reqEmail = true;
   }
 
-  if (isEmail) {
+  if (reqEmail) {
     res.send("User already exists");
   } else {
     bcrypt.hash(data.password, saltRounds).then(async function (hash) {
       data.password = hash;
       const user = await db.collection("users").add(data);
-      res.send("Register OK");
+      res.send("You are now registered");
     });
   }
 });
@@ -52,15 +52,13 @@ app.post("/register", async (req, res) => {
 //login user
 app.post("/login", async (req, res) => {
   let data = req.body;
-  let emailFound = false;
   const usersRef = db.collection("users");
   const snapshot = await usersRef.where("email", "==", data.email).get();
   if (snapshot.empty) {
     let response = {};
-    response.message = "Email not found";
+    response.message = "No matching documents.Email not found";
     res.json(response);
   } else {
-    emailFound = true;
     snapshot.forEach((doc) => {
       bcrypt
         .compare(data.password, doc.data().password)
@@ -75,11 +73,11 @@ app.post("/login", async (req, res) => {
             );
             let response = {};
             response.token = token;
-            response.message = "Acces granted";
+            response.message = "You are now logged in";
             res.json(response);
           } else {
             let response = {};
-            response.message = "Invalid password";
+            response.message = "Invalid password :(";
             res.json(response);
           }
         });
@@ -95,7 +93,7 @@ app.get("/populateLibraries", async (req, res) => {
     await db.collection("libraries").add(library);
   });
 
-  res.send("Populate ok");
+  res.send("S-au populat librariile");
 });
 
 //populate db books
@@ -113,7 +111,7 @@ app.get("/populateBooks", async (req, res) => {
         .add(book);
     });
   });
-  res.send("Populate ok");
+  res.send("S-au adaugat carti in librarii");
 });
 
 

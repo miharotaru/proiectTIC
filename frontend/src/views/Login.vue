@@ -1,23 +1,29 @@
 <template>
-  <div  class="register">
+  <div class="register">
     <br />
-    <h1  class="text">Sign in</h1>
+    <h1 class="text">Sign in</h1>
     <br />
     <form class="center" @submit.prevent="login()">
       <div>
         <label class="textInput">Email</label>
         <div>
-          <input v-model="email" type="email" class="inputStile"  required/>
+          <input v-model="email" type="email" class="inputStile" required />
         </div>
       </div>
       <div>
         <label class="textInput">Password</label>
         <div>
-          <input v-model="password" type="password" class="inputStile"  required/>
+          <input
+            v-model="password"
+            type="password"
+            class="inputStile"
+            required
+          />
         </div>
       </div>
       <button type="submit" class="allButtons">Sign in</button>
     </form>
+    <h3 class="text">{{ loginResponse }}</h3>
   </div>
 </template>
   
@@ -29,6 +35,7 @@ export default {
     return {
       email: "",
       password: "",
+      loginResponse:"",
     };
   },
   methods: {
@@ -41,13 +48,18 @@ export default {
       requestParams.method = "POST";
       requestParams.body = JSON.stringify(data);
       fetch(base_url + "login", requestParams).then((res) => {
-        res.json().then((res) => {
-          if (res.token) {
-            localStorage.setItem("JWTtoken", res.token);
+        res.json().then((jsonRes) => {
+          if (jsonRes.token) {
+            localStorage.setItem("JWTtoken", jsonRes.token);
             this.$store.dispatch("login", true);
+            this.$router.push("/");
+          } else{
+            this.loginResponse = "Incorrect Password";
+             this.email = "";
+             this.password = "";
           }
-          this.$router.push("/");
         });
+        
       });
     },
   },
@@ -55,7 +67,7 @@ export default {
 </script>
   
   <style>
-  .text{
-    color: black;
-  }
+.text {
+  color: black;
+}
 </style>

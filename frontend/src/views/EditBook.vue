@@ -75,8 +75,7 @@ export default {
   methods: {
     editBook() {
       let requestParams = { ...requestOptions };
-      requestParams.headers.Authorization =
-        "Bearer " + window.localStorage.getItem("JWTtoken");
+      requestParams.headers.Authorization = "Bearer " + window.localStorage.getItem("JWTtoken");
       requestParams.method = "PUT";
       let book = {
         title: this.title,

@@ -3,8 +3,17 @@
 <template>
   <div>
     <h1 id="title">Libraries with a lot of books!</h1>
+
     <div id="libraryContainer">
       <div v-for="(library, i) in libraries" :key="i" class="libraryCard">
+        <div>
+          <button
+            v-if="isAuthenticated"
+            @click="deleteLibrary(library)"
+            class="xButton"> X
+          </button>
+        </div>
+
         <h3>Name: {{ library.name }}</h3>
         <h3>City: {{ library.city }}</h3>
         <h3>County: {{ library.county }}</h3>
@@ -18,13 +27,6 @@
             class="allButtons"
           >
             Edit
-          </button>
-          <button
-            v-if="isAuthenticated"
-            @click="deleteLibrary(library)"
-            class="allButtons"
-          >
-            Delete
           </button>
         </div>
       </div>
@@ -53,12 +55,13 @@ export default {
   },
   methods: {
     deleteLibrary(library) {
+      this.libraries.splice(this.libraries.indexOf(library), 1);
       let requestParams = { ...requestOptions };
       requestParams.headers.Authorization =
         "Bearer " + window.localStorage.getItem("JWTtoken");
       requestParams.method = "DELETE";
       fetch(base_url + "libraries/" + library.id, requestParams);
-      this.libraries.splice(this.libraries.indexOf(library), 1);
+      
     },
     editLibrary(library) {
       this.$router.push({ path: "/editLibrary", query: library });
@@ -71,32 +74,46 @@ export default {
 </script>
 
 <style>
- #title {
+#title {
   display: flex;
   justify-content: center;
   color: black;
 }
 
-body, html {
-    height: 100%;
-    padding-top: 44px;
-    padding-bottom: 25px;
+body,
+html {
+  height: 100%;
+  padding-top: 44px;
+  padding-bottom: 25px;
+}
+
+.xButton{
+  display: flex;
+  justify-content: flex-end; 
+  background-color: rgb(115, 37, 65);
+  border: none;
+  color: white;
+  padding: 10px;
+  font-size: 10px;
+  border-radius: 15px;
 }
 
 #libraryContainer {
   display: flex;
+  align-content: space-around;
   flex-direction: row;
   flex-wrap: wrap;
-  height: 60vh;
+
 }
 
 .libraryCard {
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
-  align-items:start;
+  align-items: start; 
   border: 3px solid black;
   border-radius: 5px;
-  min-width: 200px; 
+  min-width: 250px;
   margin: 3px;
   color: black;
   height: max-content;
@@ -112,6 +129,5 @@ body, html {
   height: 30px;
   margin: 3px;
   margin-top: 10px;
-} 
-
+}
 </style>
